@@ -1,0 +1,1 @@
+pyftsubset fonts/OpenSansRegular/OpenSansRegular.ttf --output-file=fonts/OpenSansRegular/OpenSansRegular--pyftsubset.ttf --unicodes-file=fonts/codes.txt

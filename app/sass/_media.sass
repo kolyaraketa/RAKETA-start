@@ -1,0 +1,25 @@
+@import "vars"
+
+/*==========  Desktop First  ==========*/
+
+@media only screen and (max-width : 650px)
+	.header-content p
+		display: none
+
+@media only screen and (max-width : 450px)
+	body
+		font-size: 14px
+	.header-content .header-logo
+		margin-right: 10px
+		img
+			width: 130px
+	footer .footer-phone,
+	.header-content .header-phone
+		background: none
+		padding-left: 0
+	.footer-content
+		flex-wrap: wrap
+		a
+			flex-grow: 1
+		.footer-phone
+			text-align: center

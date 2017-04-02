@@ -1,0 +1,171 @@
+@import "sass/_mixins/mixins"
+@import "sass/fonts"
+@import "sass/libs"
+@import "sass/vars"
+
+*::-webkit-input-placeholder
+	color: #666
+	opacity: 1
+*:-moz-placeholder
+	color: #666
+	opacity: 1
+*::-moz-placeholder
+	color: #666
+	opacity: 1
+*:-ms-input-placeholder
+	color: #666
+	opacity: 1
+
+body input:focus:required:invalid,
+body textarea:focus:required:invalid
+	color: #666
+body input:required:valid,
+body textarea:required:valid
+	color: #666
+
+html, body
+	height: 100%
+
+body
+	font-size: 16px
+	min-width: 320px
+	position: relative
+	line-height: 1.75
+	font-family: $def-ff
+	overflow-x: hidden
+	// opacity: 1
+
+h1, h2, h3, h4, h5, h6, p
+	margin-top: 0
+ul
+	list-style: none
+
+
+//CONTAINER WIDTH
+.container
+	+cont(1180px)
+
+//HEADER START
+
+
+//Spinner
+.spinner
+	display: none
+	position: absolute
+	bottom: 18px
+	right: calc(50% - 57px)
+	&:hover
+		cursor: wait
+	.spinner_svg
+		position: relative
+		z-index: 400
+	#Group
+		stroke-dasharray: 142
+		stroke-dashoffset: 142
+		animation: dash 8s cubic-bezier(0.02, 0.61, 0.85, 0.98) infinite
+	#Oval-1
+		fill: none
+		transform-origin: 15px 15px
+		animation: pulsate 8s infinite
+	#Oval-2,
+	#Oval-3,
+	#Oval-4
+		fill: none
+		transform-origin: 15px 15px
+		opacity: 0
+	#Oval-2
+		animation: float 8s ease 3s infinite
+	#Oval-3
+		animation: float2 8s ease 4s infinite
+	#Oval-4
+		animation: float3 8s ease 5s infinite
+
+@keyframes dash
+	25%
+		stroke-dashoffset: 0
+		opacity: inherit
+	75%
+		opacity: 1
+		stroke-dashoffset: 0
+	99%
+		opacity: 0
+		stroke-dashoffset: 0
+	100%
+		stroke-dashoffset: 142
+
+@keyframes pulsate
+	0%
+		opacity: 1
+	25%
+		transform: scale(1)
+		animation-timing-function: cubic-bezier(0, 0.96, 0.56, 0.97)
+	28%
+		transform: scale(0.6)
+		animation-timing-function: ease-in
+	37.5%
+		transform: scale(0.95)
+		animation-timing-function: cubic-bezier(0, 0.96, 0.56, 0.97)
+	40.5%
+		transform: scale(0.6)
+		animation-timing-function: ease-in
+	50%
+		transform: scale(0.9)
+		animation-timing-function: cubic-bezier(0, 0.96, 0.56, 0.97)
+	53%
+		transform: scale(0.6)
+		animation-timing-function: ease-in
+	62.5%
+		transform: scale(0.85)
+		animation-timing-function: cubic-bezier(0, 0.96, 0.56, 0.97)
+	65.5%
+		transform: scale(0.6)
+		animation-timing-function: ease-in
+	75%
+		transform: scale(0.85)
+		animation-timing-function: cubic-bezier(0, 0.96, 0.56, 0.97)
+		opacity: 1
+		fill: none
+	100%
+		transform: scale(0.6)
+		animation-timing-function: ease-in
+		opacity: 0
+		fill: #fff
+
+@keyframes float
+	0%
+		opacity: 0
+	0.1%
+		transform: scale(1)
+		opacity: 0.6
+	40%
+		transform: scale(2)
+		opacity: 0
+	100%
+		transform: scale(1)
+		opacity: 0
+
+@keyframes float2
+	0%
+		opacity: 0
+	0.1%
+		transform: scale(1)
+		opacity: 0.6
+	30%
+		transform: scale(2)
+		opacity: 0
+	100%
+		transform: scale(1)
+		opacity: 0
+
+@keyframes float3
+	0%
+		opacity: 0
+	0.1%
+		transform: scale(1)
+		opacity: 0.6
+	30%
+		transform: scale(2)
+		opacity: 0
+	100%
+		transform: scale(1)
+		opacity: 0

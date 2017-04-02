@@ -1,0 +1,57 @@
+//PSEUDO-ELEMENTS
+=ps($width, $height)
+	display: block
+	content: ""
+	position: absolute
+	width: $width
+	height: $height
+
+
+//PX TO EM
+$browser-context: 16
+@function em($pixels, $context: $browser-context)
+	@if (unitless($pixels))
+		$pixels: $pixels * 1px
+	@if (unitless($context))
+		$context: $context * 1px
+	@return $pixels / $context * 1em
+
+
+//RAKETA GRID SYSTEM
+$cols: 12
+
+=grid
+	display: flex
+	flex-wrap: wrap
+	justify-content: flex-start
+	margin-left: -15px
+	margin-right: -15px
+=col($col)
+	$flex-basis: percentage($col / $cols)
+	flex-basis: $flex-basis
+	max-width: $flex-basis
+	// padding: 0 15px
+	padding-right: 15px
+	padding-left: 15px
+=of-r($ofr)
+	$margin-right: percentage($ofr / $cols)
+	margin-right: $margin-right
+=of-l($ofl)
+	$margin-left: percentage($ofl / $cols)
+	margin-left: $margin-left
+=cont($width: 1080px)
+	max-width: $width
+	margin-right: auto
+	margin-left: auto
+	padding: 0 15px
+=cont-f
+	max-width: 100%
+	width: 100%
+	padding: 0 15px
+=cont($container: 1180px)
+	max-width: $container
+	display: block
+	margin-right: auto
+	margin-left: auto
+	padding-right: 15px
+	padding-left: 15px
