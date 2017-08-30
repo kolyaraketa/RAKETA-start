@@ -1,1 +1,1 @@
-pyftsubset fonts/OpenSansRegular/OpenSansRegular.ttf --output-file=fonts/OpenSansRegular/OpenSansRegular--pyftsubset.ttf --unicodes-file=fonts/codes.txt
+pyftsubset fonts/ProximaNovaSemibold/ProximaNovaSemibold.ttf --output-file=fonts/ProximaNovaSemibold/ProximaNovaSemibold--pyftsubset.ttf --unicodes-file=fonts/codes.txt

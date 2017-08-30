@@ -33,16 +33,11 @@ gulp.task('common-js', function() {
 
 gulp.task('js', ['common-js'], function() {
 	return gulp.src([
-		'app/libs/jquery/dist/jquery.min.js',
-		'app/libs/jquery.parallax/jquery.parallax.min.js',
-		'app/libs/slick-carousel/slick/slick.min.js',
-		'app/libs/jquery.scrollLock/jquery.scrollLock.js',
-		'app/libs/jquery.maskedinput/dist/jquery.maskedinput.min.js',
-		'app/libs/jquery-form-validator/form-validator/jquery.form-validator.min.js',
+		'app/libs/vanilla-text-mask/dist/vanillaTextMask.js',
 		'app/js/common.min.js', // Всегда в конце
 		])
 	.pipe(concat('scripts.min.js'))
-	// .pipe(uglify()) // Минимизировать весь js (на выбор)
+	.pipe(uglify()) // Минимизировать весь js (на выбор)
 	.pipe(gulp.dest('app/js'))
 	.pipe(browserSync.reload({stream: true}));
 });
@@ -98,11 +93,12 @@ gulp.task('watch', ['sass', 'headersass', 'js', 'browser-sync'], function() {
 	gulp.watch('app/header.sass', ['headersass']);
 	gulp.watch('app/sass/**/*.sass', ['sass']);
 	gulp.watch(['libs/**/*.js', 'app/js/common.js'], ['js']);
+	gulp.watch('app/*/*.html', browserSync.reload);
 	gulp.watch('app/*.html', browserSync.reload);
 });
 
 gulp.task('buildhtml', ['headersass-build'], function() {
-  gulp.src(['app/*.html'])
+	gulp.src(['app/*.html', 'app/*/*.html'])
 		.pipe(gulpRemoveHtml({keyword: 'svgprite'}))
 		.pipe(replace({
 			patterns: [{
@@ -121,10 +117,12 @@ gulp.task('build', ['removedist', 'buildhtml', 'sass-build', 'js'], function() {
 
 	var buildFiles = gulp.src([
 		'app/.htaccess',
+		'app/*.php'
 		]).pipe(gulp.dest('dist'));
 
 	var buildCss = gulp.src([
-		'app/css/main.min.css',
+		'app/css/*.css',
+		'app/css/*/*.css',
 		]).pipe(gulp.dest('dist/css'));
 
 	var buildJs = gulp.src([
@@ -153,8 +151,9 @@ gulp.task('svg-build-sprite', function() {
 	}))
 	.pipe(gulp.dest('app/img/sprite'));
 });
+
 gulp.task('svg-include-sprite', function() {
-	gulp.src('app/*.html')
+	gulp.src(['app/*.html', 'app/*/*.html'])
 	.pipe(gulpRemoveHtml({keyword: 'svgprite'}))
 	.pipe(replace({
 		patterns: [
@@ -169,7 +168,6 @@ gulp.task('svg-include-sprite', function() {
 	}))
 	.pipe(gulp.dest('app'));
 });
-
 
 gulp.task('svg-sprite', ['svg-build-sprite', 'svg-include-sprite']);
 
