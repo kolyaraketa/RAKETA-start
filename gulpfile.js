@@ -37,7 +37,7 @@ gulp.task('js', ['common-js'], function() {
 		'app/js/common.min.js', // Всегда в конце
 		])
 	.pipe(concat('scripts.min.js'))
-	.pipe(uglify()) // Минимизировать весь js (на выбор)
+	// .pipe(uglify()) // Минимизировать весь js (на выбор)
 	.pipe(gulp.dest('app/js'))
 	.pipe(browserSync.reload({stream: true}));
 });
@@ -93,8 +93,7 @@ gulp.task('watch', ['sass', 'headersass', 'js', 'browser-sync'], function() {
 	gulp.watch('app/header.sass', ['headersass']);
 	gulp.watch('app/sass/**/*.sass', ['sass']);
 	gulp.watch(['libs/**/*.js', 'app/js/common.js'], ['js']);
-	gulp.watch('app/*/*.html', browserSync.reload);
-	gulp.watch('app/*.html', browserSync.reload);
+	gulp.watch('app/**/*.html', browserSync.reload);
 });
 
 gulp.task('buildhtml', ['headersass-build'], function() {
@@ -127,7 +126,9 @@ gulp.task('build', ['removedist', 'buildhtml', 'sass-build', 'js'], function() {
 
 	var buildJs = gulp.src([
 		'app/js/scripts.min.js',
-		]).pipe(gulp.dest('dist/js'));
+		])
+		.pipe(uglify())
+		.pipe(gulp.dest('dist/js'));
 
 	var buildFonts = gulp.src([
 		'app/fonts/**/*',
@@ -153,7 +154,7 @@ gulp.task('svg-build-sprite', function() {
 });
 
 gulp.task('svg-include-sprite', function() {
-	gulp.src(['app/*.html', 'app/*/*.html'])
+	gulp.src(['app/**/*.html'])
 	.pipe(gulpRemoveHtml({keyword: 'svgprite'}))
 	.pipe(replace({
 		patterns: [
