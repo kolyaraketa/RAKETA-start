@@ -42,16 +42,19 @@ gulp.task('sass', function () {
 });
 
 gulp.task('sassProd', function () {
-	gulp.src('./src/sass/**/*.sass')
+	return gulp.src('./src/sass/**/*.sass')
 		.pipe(sass().on('error', sass.logError))
 		.pipe(autoprefixer({browsers: ['last 15 versions']}))
 		.pipe(cleanCSS())
 		.pipe(rename({suffix: '.min', prefix : ''}))
 		.pipe(gulp.dest('dist/css'))
 		.pipe(gulp.dest('src/css'));
-	return gulp.src(['src/css/header.min.css'])
-		.pipe(replace('@font-face', '111'))
-		.pipe(gulp.dest('src/css'));
+});
+
+gulp.task('headerCssFixPath', function () {
+	return gulp.src('./dist/css/header.min.css')
+		.pipe(replace('..\/', '.\/'))
+		.pipe(gulp.dest('./src/css/'));
 });
 
 gulp.task('js', function() {
@@ -120,7 +123,7 @@ gulp.task('svg-auto-sprite', ['svg-sprite'], function() {
 });
 
 
-gulp.task('default', ['js', 'sass', 'html', 'fonts', 'svg-auto-sprite', 'img'], function () {
+gulp.task('default', ['js', 'sass', 'fonts', 'svg-auto-sprite', 'img', 'html'], function () {
 	browserSync({
 		server: { baseDir: 'src/temp' },
 		notify: false,
@@ -133,7 +136,9 @@ gulp.task('default', ['js', 'sass', 'html', 'fonts', 'svg-auto-sprite', 'img'], 
 	gulp.watch('./src/fonts/**/*', ['fonts']);
 });
 
-gulp.task('build', ['imgProd', 'sassProd', 'jsProd', 'fontsProd', 'htmlProd']);
+gulp.task('build', function(){
+	runSequence('imgProd', 'sassProd', 'headerCssFixPath', 'jsProd', 'fontsProd', 'htmlProd');
+});
 
 gulp.task('removetemp', function() { return del.sync('./src/temp'); });
 
