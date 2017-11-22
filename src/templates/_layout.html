@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru" itemscope itemtype="http://schema.org/WebPage">
+
+<head>
+	
+	{% include "./_meta.html" %}
+
+	<!-- HEADER CSS START -->
+	
+	{% if build == 'prod' %}
+		<style>
+			{% include "../css/header.min.css" %}
+		</style>
+	{% else %}
+		<style>
+			{% include "../css/header.css" %}
+		</style>
+	{% endif %}
+
+	<!-- HEADER CSS END -->
+
+</head>
+
+<body >
+
+	<!--HIDE CONTENT BEFORE PAGE LOADED START-->
+	<script>
+		document.body.className += " js-loading";
+		window.addEventListener("load", removeLoadingClass, false);
+		function removeLoadingClass() {
+			document.body.className = document.body.className.replace("js-loading", "");
+		}
+	</script>
+	<!--HIDE CONTENT BEFORE PAGE LOADED END-->
+
+	<!-- SVG SPRITE START-->
+	<div style="height: 0; width: 0; position: absolute; visibility: hidden">
+		{% include "../img/svg-sprite/sprite/symbol/svg/sprite.symbol.svg" %}
+	</div>
+	<!-- SVG SPRITE END-->
+
+	<!-- HEADER START -->
+	{% include "./_header.html" %}
+	<!-- HEADER END -->
+
+	<!-- MAIN START -->
+	{% block content %}{% endblock %}
+	<!-- MAIN END -->
+
+	<!-- FOOTER START -->
+	{% include "./_footer.html" %}
+	<!-- FOOTER END -->
+	
+	
+	{% if build == 'dev' %}
+		<link rel="stylesheet" href="css/style.css">
+		<script src="js/libs.js"></script>
+		<script src="js/scripts.js"></script>
+	{% else %}
+		<link rel="stylesheet" href="css/style.min.css">
+		<script src="js/scripts.min.js"></script>
+	{% endif %}
+
+</body>
+</html>

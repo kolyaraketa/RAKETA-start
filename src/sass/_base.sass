@@ -1,0 +1,96 @@
+*::-webkit-input-placeholder
+	color: #333
+	opacity: 1
+*:-moz-placeholder
+	color: #333
+	opacity: 1
+*::-moz-placeholder
+	color: #333
+	opacity: 1
+*:-ms-input-placeholder
+	color: #333
+	opacity: 1
+
+body input:focus:required:invalid,
+body textarea:focus:required:invalid
+	color: #333
+body input:required:valid,
+body textarea:required:valid
+	color: #333
+
+*
+	box-sizing: border-box
+	margin: 0
+	padding: 0
+
+// html, body
+// 	height: 100%
+
+body
+	font-size: 16px
+	min-width: 320px
+	position: relative
+	font-family: $r
+	color: #333
+	overflow-x: hidden
+	min-height: 100vh
+
+main
+	overflow: hidden
+
+//Scroll lock
+html
+	overflow-y: scroll
+	&.scroll-locked
+		height: 100vh
+		position: fixed
+		left: 0
+		width: 100%
+		overflow-x: visible
+
+//PRELOADER
+.js-loading
+	animation-play-state: paused !important
+@keyframes js-loading
+	0%
+		opacity: 0
+	100%
+		opacity: 1
+
+//Dissable allert message for form validation
+.inspect-message-text
+	display: none
+
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+input:-webkit-autofill, 
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus
+	// border: none
+	-webkit-text-fill-color: #333
+	-webkit-box-shadow: 0 0 0px 1000px #fff inset
+	transition: background-color 5000s ease-in-out 0s
+
+
+//CONTAINER WIDTH
+.container
+	+cont(1130px)
+
+//GRID
+div[class$="__grid"]
+	+grid
+div[class$="__col"]
+	padding-right: 15px
+	padding-left: 15px
+
+.hidden
+	display: none
+
+//TYPOGRAPHY
