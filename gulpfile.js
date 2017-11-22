@@ -42,19 +42,16 @@ gulp.task('sass', function () {
 });
 
 gulp.task('sassProd', function () {
-	return gulp.src('./src/sass/**/*.sass')
+	gulp.src('./src/sass/**/*.sass')
 		.pipe(sass().on('error', sass.logError))
 		.pipe(autoprefixer({browsers: ['last 15 versions']}))
 		.pipe(cleanCSS())
 		.pipe(rename({suffix: '.min', prefix : ''}))
 		.pipe(gulp.dest('dist/css'))
 		.pipe(gulp.dest('src/css'));
-});
-
-gulp.task('headerCssFixPath', function () {
-	return gulp.src('./dist/css/header.min.css')
-		.pipe(replace('..\/', '.\/'))
-		.pipe(gulp.dest('./src/css/'));
+	return gulp.src(['src/css/header.min.css'])
+		.pipe(replace('@font-face', '111'))
+		.pipe(gulp.dest('src/css'));
 });
 
 gulp.task('js', function() {
@@ -101,9 +98,12 @@ gulp.task('img', function () {
 });
 
 gulp.task('imgProd', function () {
-	return gulp.src('src/img/**')
+	gulp.src(['src/img/**/*.jpg', 'src/img/**/*.png'])
 	.pipe(imagemin())
-	.pipe(gulp.dest('dist/img'))
+	.pipe(gulp.dest('dist/img'));
+	return gulp.src('src/img/*.svg')
+	.pipe(svgmin())
+	.pipe(gulp.dest('dist/img'));
 });
 
 gulp.task('svg-sprite', function() {
@@ -123,22 +123,20 @@ gulp.task('svg-auto-sprite', ['svg-sprite'], function() {
 });
 
 
-gulp.task('default', ['js', 'sass', 'fonts', 'svg-auto-sprite', 'img', 'html'], function () {
+gulp.task('default', ['js', 'sass', 'html', 'fonts', 'svg-auto-sprite', 'img'], function () {
 	browserSync({
 		server: { baseDir: 'src/temp' },
 		notify: false,
 		// tunnel: true,
 		// tunnel: "projectmane", //Demonstration page: http://projectmane.localtunnel.me
 	});
-	gulp.watch(['./src/*.html', './src/templates/*.html'], ['html']);
+	gulp.watch(['./src/*.html', './src/templates/*.html', './src/css/header.css'], ['html']);
 	gulp.watch('./src/sass/**/*.sass', ['sass']);
 	gulp.watch(['./src/js/*.js', './src/libs/**/*.js'], ['js']);
 	gulp.watch('./src/fonts/**/*', ['fonts']);
 });
 
-gulp.task('build', function(){
-	runSequence('imgProd', 'sassProd', 'headerCssFixPath', 'jsProd', 'fontsProd', 'htmlProd');
-});
+gulp.task('build', ['imgProd', 'sassProd', 'jsProd', 'fontsProd', 'htmlProd']);
 
 gulp.task('removetemp', function() { return del.sync('./src/temp'); });
 

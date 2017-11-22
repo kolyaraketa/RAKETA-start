@@ -30,7 +30,8 @@ body
 	font-size: 16px
 	min-width: 320px
 	position: relative
-	font-family: $def-ff
+	font-family: $r
+	color: #333
 	overflow-x: hidden
 	min-height: 100vh
 
@@ -38,7 +39,7 @@ main
 	overflow: hidden
 
 //Scroll lock
-body
+html
 	overflow-y: scroll
 	&.scroll-locked
 		height: 100vh
@@ -46,18 +47,6 @@ body
 		left: 0
 		width: 100%
 		overflow-x: visible
-
-h1
-	color: #333
-h2, .h2
-	color: #333
-h3, .h3
-	color: #333
-ul
-	list-style: none
-p
-	color: #333
-	max-width: 100%
 
 //PRELOADER
 .js-loading
@@ -92,11 +81,16 @@ select:-webkit-autofill:focus
 
 //CONTAINER WIDTH
 .container
-	+cont(1008px)
+	+cont(1130px)
 
 //GRID
-div[class$="-grid"]
+div[class$="__grid"]
 	+grid
+div[class$="__col"]
+	padding-right: 15px
+	padding-left: 15px
 
 .hidden
 	display: none
+
+//TYPOGRAPHY

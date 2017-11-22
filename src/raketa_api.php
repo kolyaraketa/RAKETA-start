@@ -1,10 +1,11 @@
 <?php
 
-// $recepient = "sv@lexstatus.com.ua";
-$pagetitle = "Всеукраинский экспертно-правовой союз";
+$recepient = "raketakolya@gmail.com";
+$pagetitle = "Title of my awesome website";
 
 $mail = isset($_POST['mail']) ? trim($_POST['mail']) : '';
 $name = isset($_POST['name']) ? trim($_POST['name']) : '';
+$mail = isset($_POST['mail']) ? trim($_POST['mail']) : '';
 $phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
 $data_form = isset($_POST['data_form']) ? trim($_POST['data_form']) : '';
 $url = isset($_POST['url']) ? trim($_POST['url']) : '';
@@ -21,55 +22,30 @@ $time_submitted = date("H:i");
 
 if($phone != ''){
 
-	// $db = new PDO('mysql:host=localhost;dbname=leads_monitoring', 'monkey748', 'hardpassword649');
-	// $db->exec("SET NAMES UTF8");
-	// $query = $db->prepare("INSERT INTO hm_leads set name=:name, phone=:phone, mail=:mail, url=:url, ref=:ref,city=:city, ga_client_id=:ga_client_id, lead_name=:lead_name, data_form=:data_form, date_submitted=:date_submitted,time_submitted=:time_submitted, ip_address=:ip_address, utm_source=:utm_source, utm_campaign=:utm_campaign, utm_medium=:utm_medium, utm_term=:utm_term, utm_content=:utm_content, is_test=case when (lower(name) like '%test%' OR lower(name) like '%тест%' OR ip_address IN (select distinct t.ip_address from reporting.exclude_ip t)) then 1 else 0 end");
-
-	// $params = [
-	// 	'name' => $name,
-	// 	'mail' => $mail,
-	// 	'phone' => $phone,
-	// 	'url' => $url,
-	// 	'ref' => $ref,
-	// 	'city' => $city,
-	// 	'ga_client_id' => $ga_client_id,
-	// 	'lead_name' => $lead_name,
-	// 	'data_form' => $data_form,
-	// 	'date_submitted' => $date_submitted,
-	// 	'time_submitted' => $time_submitted,
-	// 	'ip_address' => $ip_address,
-	// 	'utm_source' => $utm_source,
-	// 	'utm_campaign' => $utm_campaign,
-	// 	'utm_medium' => $utm_medium,
-	// 	'utm_term' => $utm_term,
-	// 	'utm_content' => $utm_content
-	// ];
-	// $query->execute($params);
-
-
 	$message = "
-	‼ $pagetitle ‼
+	<h2>‼ $pagetitle ‼</h2>
+<table>
+	<tr><td>👤 Имя:</td><td>$name</td></tr>
+	<tr><td>☎ Телефон:</td><td>$phone</td></tr>
+	<tr><td>📧 E-mail:</td><td>$mail</td></tr>
+	<tr><td>📝 Отправленная форма:</td><td>$data_form</td></tr>
+	<tr><td>🔗 Страница заявки:</td><td>$url</td></tr>
+	<tr><td>📅 Дата заявки:</td><td>$date_submitted</td></tr>
+	<tr><td>⏲ Время заявки:</td><td>$time_submitted</td></tr>
+	<tr><td>🔙 Пришел со страницы:</td><td>$ref</td></tr>
 
-	👤 Имя: $name
-	☎ Телефон: $phone
-	📧 E-mail: $mail
-	📝 Отправленная форма: $data_form
-	🔗 Страница заявки: $url
-	📅 Дата заявки: $date_submitted
-	⏲ Время заявки: $time_submitted
-	🔙 Пришел со страницы: $ref
+	<tr><td>utm_source:</td><td>$utm_source</td></tr>
+	<tr><td>utm_campaign:</td><td>$utm_campaign</td></tr>
+	<tr><td>utm_medium:</td><td>$utm_medium</td></tr>
+	<tr><td>utm_term:</td><td>$utm_term</td></tr>
+	<tr><td>utm_content:</td><td>$utm_content</td></tr>
+</table>
+";
 
-	utm_source: $utm_source
-	utm_campaign: $utm_campaign
-	utm_medium: $utm_medium
-	utm_term: $utm_term
-	utm_content: $utm_content
-	";
-
-	// $headers = 'MIME-Version: 1.0' . "\r\n";
-	// $headers .= 'Content-type: text/html; charset=urf-8' . "\r\n";
-	// $headers .= 'From: no-reply@hunngry-monkey.com.ua';
-	// mail($recepient, $pagetitle, $message, $headers);
+	$headers = 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=urf-8' . "\r\n";
+	$headers .= 'From: raketakolya@gmail.com';
+	mail($recepient, $pagetitle, $message, $headers);
 
 	//SEND MESSAGE TO TELEGRAM
 	function sendMessage($chatID, $message, $token) {
@@ -82,48 +58,9 @@ if($phone != ''){
 		curl_close($ch);
 	}
 
-	$token = "bot258893453:AAFH2F6CCYCHuZJzAWm27Vb008b9GJHo2nI";
-	$chatID = "-201316944";
+	$token = "bot****";
+	$chatID = "***";
 	sendMessage($chatID, $message, $token);
-
-
-// // SPUTNIK API
-
-// $first_name = $name;
-// $email = $mail;
-
-// $user = 'id-dyachenko@yandex.ru';
-// $password = 'ghbdtncnde123';
-// $subscribe_contact_url = 'https://esputnik.com.ua/api/v1/contact/subscribe';
-// $formType = 'hm-moto';
-
-
-// $json_value = array("name" => $name, "mail" => $mail, "phone" => $phone);
-
-// $json_contact_value = new stdClass();
-// $contact = new stdClass();
-// $contact->firstName = $first_name;
-// $contact->channels = array(array('type' => 'email', 'value' => $email), array('type'=>'sms', 'value' => $phone));
-// $groups = array('hm-moto');
-// $json_contact_value->contact = $contact;
-// $json_contact_value->groups = $groups;
-// $json_contact_value->formType = $formType;
-// send_request($subscribe_contact_url, $json_contact_value, $user, $password);
-
-// function send_request($url, $json_value, $user, $password) {
-// $ch = curl_init('https://esputnik.com.ua/api/v1/contact/subscribe');
-// curl_setopt($ch, CURLOPT_POST, 1);
-// curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($json_value));
-// curl_setopt($ch, CURLOPT_HEADER, 1);
-// curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json', 'Content-Type: application/json'));
-// curl_setopt($ch, CURLOPT_URL, $url);
-// curl_setopt($ch,CURLOPT_USERPWD, $user.':'.$password);
-// curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
-// $output = curl_exec($ch)
-// ;
-// echo($output);
-// curl_close($ch);
-// }
 
 }
 ?>

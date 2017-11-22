@@ -1,9 +1,9 @@
 {% set data = {
-	"title": "My awesome title of this website",
-	"description": "My awesome description of this website",
-	"url": "https://mywebsite.com/",
-	"keywords": "",
-	"themeColor": "#000"
+	"title": "Title of my awesome website",
+	"description": "Description of my awesome website",
+	"url": "http://my-awesome-website.com/",
+	"keywords": "my, website, is, awesome",
+	"themeColor": "#008250"
 } %}
 
 {% extends "templates/_layout.html" %}
@@ -11,12 +11,32 @@
 {% block content %}
 
 <main>
-	<section>
-		<div class="container">
-			<h1>{{ build }}</h1>
-			<input type="tel" value="+38(" placeholder="+38(___) ___-__-__">
+
+	<!-- EXAMPLE OF FORM!!! -->
+	<!-- <form data-form="Заказать" name="order__form" action="raketa-api.php" class="typical-form">
+		<div class="form__field">
+			<label for="order-name">
+				<span>Ім'я</span>
+			</label>
+			<input type="text" id="order-name" name="name" class="raketa_validation">
 		</div>
-	</section>
+		<div class="form__field">
+			<label for="order-phone">
+				<span>Телефон</span>
+			</label>
+			<input type="tel" name="phone" id="order-phone" class="user_phone raketa_validation" placeholder="+38(___) ___-__-__" required="">
+		</div>
+		<div class="form__field">
+			<label for="order-email">
+				<span>E-mail</span>
+			</label>
+			<input type="email" name="email" id="order-email" class="user_email">
+		</div>
+		<div class="form__btn">
+			<button type="submit" class="footer__btn btn" id="btn">ОТРИМАЙТЕ КОНСУЛЬТАЦІЮ</button>
+			<p class="form_msg"></p>
+		</div>
+	</form> -->
 </main>
 
 {% endblock %}

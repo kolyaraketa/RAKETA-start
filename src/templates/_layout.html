@@ -12,7 +12,9 @@
 			{% include "../css/header.min.css" %}
 		</style>
 	{% else %}
-		<link rel="stylesheet" href="css/header.css">
+		<style>
+			{% include "../css/header.css" %}
+		</style>
 	{% endif %}
 
 	<!-- HEADER CSS END -->
@@ -48,6 +50,7 @@
 	<!-- FOOTER START -->
 	{% include "./_footer.html" %}
 	<!-- FOOTER END -->
+	
 	
 	{% if build == 'dev' %}
 		<link rel="stylesheet" href="css/style.css">
