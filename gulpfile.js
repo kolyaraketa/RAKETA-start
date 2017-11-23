@@ -123,7 +123,7 @@ gulp.task('svg-auto-sprite', ['svg-sprite'], function() {
 });
 
 
-gulp.task('default', ['js', 'sass', 'html', 'fonts', 'svg-auto-sprite', 'img'], function () {
+gulp.task('default', runSequence('js', 'sass', 'fonts', 'svg-auto-sprite', 'img', 'html'), function () {
 	browserSync({
 		server: { baseDir: 'src/temp' },
 		notify: false,
