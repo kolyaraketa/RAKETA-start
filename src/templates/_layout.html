@@ -7,15 +7,13 @@
 
 	<!-- HEADER CSS START -->
 	
-	{% if build == 'prod' %}
-		<style>
-			{% include "../css/header.min.css" %}
-		</style>
+
+	{% if build == 'dev' %}
+		<style>{% include "../css/header.css" %}</style>
 	{% else %}
-		<style>
-			{% include "../css/header.css" %}
-		</style>
+		<style>{% include "../css/header.min.css" %}</style>
 	{% endif %}
+
 
 	<!-- HEADER CSS END -->
 

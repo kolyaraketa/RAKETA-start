@@ -17,6 +17,7 @@ var gulp           = require('gulp'),
 		imagemin       = require('gulp-imagemin'),
 		uglify         = require('gulp-uglify'),
 		replace        = require('gulp-replace'),
+		watch          = require('gulp-watch'),
 		sass           = require('gulp-sass');
 
 gulp.task('html', function () {
@@ -34,6 +35,15 @@ gulp.task('htmlProd', function () {
 
 gulp.task('sass', function () {
 	return gulp.src('./src/sass/**/*.sass')
+		.pipe(sass().on('error', sass.logError))
+		.pipe(gulp.dest('./src/temp/css'))
+		.pipe(gulp.dest('./src/css'))
+		.pipe(browserSync.reload({stream: true}));
+});
+
+gulp.task('sassStream', function () {
+	return gulp.src('./src/sass/**/*.sass')
+		.pipe(watch('./src/sass/**/*.sass'))
 		.pipe(sass().on('error', sass.logError))
 		.pipe(gulp.dest('./src/temp/css'))
 		.pipe(gulp.dest('./src/css'))
@@ -128,7 +138,7 @@ gulp.task('svg-auto-sprite', ['svg-sprite'], function() {
 
 
 gulp.task('default', function () {
-	runSequence('img','sass',  'js', 'fonts', 'svg-auto-sprite', 'html');
+	runSequence('img', 'js', 'fonts', 'svg-auto-sprite', 'sassStream', 'html');
 	browserSync({
 		server: { baseDir: './src/temp' },
 		notify: false,
@@ -136,7 +146,7 @@ gulp.task('default', function () {
 		// tunnel: "projectmane", //Demonstration page: http://projectmane.localtunnel.me
 	});
 	gulp.watch(['./src/*.html', './src/templates/*.html', './src/css/header.css'], ['html']);
-	gulp.watch('./src/sass/**/*.sass', ['sass']);
+	gulp.watch('./src/sass/**/_*.sass', ['sass']);
 	gulp.watch(['./src/js/*.js', './src/libs/**/*.js'], ['js']);
 	gulp.watch('./src/fonts/**/*', ['fonts']);
 });
