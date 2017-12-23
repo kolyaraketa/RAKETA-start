@@ -1,1 +1,6 @@
-pyftsubset fonts/ProximaNovaSemibold/ProximaNovaSemibold.ttf --output-file=fonts/ProximaNovaSemibold/ProximaNovaSemibold--pyftsubset.ttf --unicodes-file=fonts/codes.txt
+pyftsubset fonts/Roboto.ttf --output-file=fonts/Roboto/Roboto.ttf --unicodes-file=fonts/codes.txt
+
+
+ttf2woff fonts/Roboto/Roboto.ttf fonts/Roboto/Roboto.woff
+
+cat fonts/Roboto/Roboto.ttf | ttf2woff2 >> fonts/Roboto/Roboto.woff2
