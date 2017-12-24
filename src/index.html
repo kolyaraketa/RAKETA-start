@@ -1,10 +1,125 @@
 {% set data = {
-	"title": "Title of my awesome website",
-	"description": "Description of my awesome website",
-	"url": "http://my-awesome-website.com/",
-	"keywords": "my, website, is, awesome",
-	"themeColor": "#008250"
+	title: 'Title of my awesome website',
+	description: 'Description of my awesome website',
+	url: 'https://ocenka.lexstatus.com.ua/',
+	keywords: 'my, website, is, awesome',
+	themeColor: '#69aa55',
+	tel: '(067) 462-30-00',
+	email: 'ocenka.lexstatus@gmail.com'
 } %}
+
+{% set weContent = [{
+		icon: 'ic-03',
+		text: '26 офисов <br> по всей Украине'
+	},{
+		icon: 'ic-01',
+		text: 'бесплатная доставка документов Новой Почтой'
+	},{
+		icon: 'ic-02',
+		text: '16 лет опыта работы с&nbsp;экспертной оценкой'
+}] %}
+
+{% set often = [{
+		icon: 'ic-04',
+		text: 'продаже, покупке, дарении, передаче имущества в наследство'
+	},{
+		icon: 'ic-05',
+		text: 'разделе имущества: например, бизнеса или жилья'
+	},{
+		icon: 'ic-06',
+		text: 'оценке ущерба имуществу для предъявления в суде'
+	},{
+		icon: 'ic-08',
+		text: 'оформлении страхового полиса на имущество'
+	},{
+		icon: 'ic-07',
+		text: 'использовании имущества в качестве залога'
+}] %}
+
+{% set types = [{
+		icon: 'ic-09',
+		type: 'Жильё'
+	},{
+		icon: 'ic-10',
+		type: 'Автомобиль'
+	},{
+		icon: 'ic-11',
+		type: 'Землю'
+	},{
+		icon: 'ic-12',
+		type: 'Оборудование'
+	},{
+		icon: 'ic-22',
+		type: 'Бизнес'
+}] %}
+
+{% set orders = [{
+		img: 'img/order.jpg',
+		title: 'Оставьте заявку на сайте или позвоните <a href="tel:{{ +'+  data.tel + ' }}" class="link__tel">'+  data.tel + '</a>',
+		descr: 'Мы уточним детали заказа, расскажем о нужных документах и назовем точные сроки и  стоимость оценки имущества.'
+	},{
+		img: 'img/done.jpg',
+		title: 'Приезжайте в один из 26 офисов, чтобы передать документы',
+		descr: 'Или отправьте их в электронном виде. Список документов индивидуален и зависит от вида оценки имущества.'
+	},{
+		img: 'img/visit.jpg',
+		title: 'Отчет по оценке будет готов через час',
+		descr: 'Вы можете забрать его в офисе или бесплатно получить Новой Почтой. Мы также отправим электронную версию отчета на ваш e-mail.'
+}] %}
+
+{% set targets = [{
+		title: 'Доходный',
+		content: 'Эксперт берет за основу расчетов возможный доход собственника от владения объектом и рассматривает возможные способы получения прибыли от эксплуатации или продажи имущества.'
+	},{
+		title: 'Затратный',
+		content: 'Обратная ситуация — оценщик выясняет, какие затраты понесет владелец объекта, если нужно будет восстановить утраченное имущество.'
+	},{
+		title: 'Сравнительный',
+		content: 'Независимая оценка имущества выполняется на основе анализа рыночных цен на подобные или идентичные объекты. '
+}] %}
+
+{% set docs = [{
+	img: 'img/pass.jpg',
+	title: 'Паспорт'
+},{
+	img: 'img/code.jpg',
+	title: 'Идентификационный код'
+},{
+	img: 'img/docs.jpg',
+	title: 'Документы на право владения имуществом'
+}] %}
+
+{% set pluses = [{
+		img: 'ic-15',
+		title: 'Мы рядом',
+		content: 'В Украине работает 26 офисов LexStatus. Выберите ближайший к вам <a href="#" target="blank">здесь.</a> При необходимости эксперты LexStatus приедут к вам в любой населенный пункт страны.'
+	},{
+		img: 'ic-16',
+		title: 'Уверены в себе',
+		content: 'LexStatus выполняет оценку имущества с 2001 года. С нами работают лучшие эксперты-оценщики и мы уверены в своем профессионализме. <a href="#">Посмотреть сертификаты</a>'
+	},{
+		img: 'ic-14',
+		title: 'Работаем быстро',
+		content: 'Каждый процесс в LexStatus отточен до идеала — поэтому мы всегда выполняем работу быстро. Стандартный отчет по оценке движимого и недвижимого имущества будет готов всего через час.'
+	},{
+		img: 'ic-13',
+		title: 'Готовы помочь',
+		content: 'Даже если вы не оформляете заказ в LexStatus, наши специалисты всегда готовы предоставить вам юридическую консультацию. Позвоните на горячую линию или приезжайте в офис LexStatus — и мы ответим на ваши вопросы.'
+}] %}
+
+{% set adresses = [{
+		type: 'Адрес главного офиса:',
+		content: 'г. Киев, ул. Коперника 12Д'
+	},{
+		type: 'Часы работы:',
+		content: 'ПН-ПТ с 9:00 до 18:00<br> СБ-ВС выходные'
+	},{
+		type: 'Горячая линия:',
+		content: '<a href="tel:'+ data.tel + '" class="link__tel">'+  data.tel + '</a>'
+	},{
+		type: 'E-mail:',
+		content: '<a href="mailto:' + data.email + '">' + data.email + '</a>'
+}] %}
 
 {% extends "templates/_layout.html" %}
 
@@ -12,31 +127,173 @@
 
 <main>
 
-	<!-- EXAMPLE OF FORM!!! -->
-	<!-- <form data-form="Заказать" name="order__form" action="raketa-api.php" class="typical-form">
-		<div class="form__field">
-			<label for="order-name">
-				<span>Ім'я</span>
-			</label>
-			<input type="text" id="order-name" name="name" class="raketa_validation">
+	<section class="we">
+		<img src="img/header-bg.jpg" alt="LexStatus Экспертная оценка имущества" class="we__bg">
+		<div class="container">
+			<h1>Экспертная оценка имущества</h1>
+			<button class="btn popup__show">ЗАКАЗАТЬ ОЦЕНКУ</button>
+			<div class="we__grid">
+				{% for weEl in weContent %}
+					<div class="we__col">
+						<div class="we__col-content">
+							{{ svg(147, 140, weEl.icon) }}
+							<p class="h3">{{ weEl.text | safe }}</p>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
 		</div>
-		<div class="form__field">
-			<label for="order-phone">
-				<span>Телефон</span>
-			</label>
-			<input type="tel" name="phone" id="order-phone" class="user_phone raketa_validation" placeholder="+38(___) ___-__-__" required="">
+	</section>
+
+	<section class="needed">
+		<div class="container">
+			<div class="needed__is">
+				<img src="img/procedure.jpg" alt="Экспертная оценка">
+				<div class="needed__is-content">
+					<p class="h2">Экспертная оценка</p>
+					<p>это процедура определения рыночной стоимости имущества. Оценка движимого и недвижимого имущества нужна при любых юридических операциях.</p>
+				</div>
+			</div>
+			<div class="needed-often">
+				<h2>Чаще всего экспертная оценка нужна при:</h2>
+				<div class="needed-often__grid">
+					{% for elOften in often %}
+						<div class="needed-often__col">
+							<div class="needed-often__content">
+								{{ svg(147, 140, elOften.icon) }}
+								<p>{{ elOften.text }}</p>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
 		</div>
-		<div class="form__field">
-			<label for="order-email">
-				<span>E-mail</span>
-			</label>
-			<input type="email" name="email" id="order-email" class="user_email">
+	</section>
+
+	<section class="types">
+		<div class="container">
+			<h2>Виды оценки имущества</h2>
+			<p>В LexStatus вы можете заказать независимую оценку имущества любой сложности. <br>Будем полезны, если вам нужно оценить:</p>
+			<div class="types__grid">
+				{% for type in types %}
+					<div class="types__col">
+						<div class="types__content">
+							{{ svg(147, 142, type.icon) }}
+							<p class="h3">{{ type.type }}</p>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			<a href="#" class="h3 types__full">Посмотреть полный список объектов оценки</a>
 		</div>
-		<div class="form__btn">
-			<button type="submit" class="footer__btn btn" id="btn">ОТРИМАЙТЕ КОНСУЛЬТАЦІЮ</button>
-			<p class="form_msg"></p>
+	</section>
+
+	<section class="order">
+		<div class="container">
+			<h2>Как заказать оценку имущества</h2>
+			<div class="order__grid">
+				{% for order in orders %}
+					<div class="order__col">
+						<div class="order__content">
+							<div class="order__img">
+								<img src="{{ order.img }}" alt="{{ order.title }}">
+							</div>
+							<h3 class="h3">{{ order.title | safe }}</h3>
+							<p>{{ order.descr }}</p>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
 		</div>
-	</form> -->
+	</section>
+
+	<section class="target">
+		<div class="container">
+			<h2>Цели и методы оценки имущества</h2>
+			<p>Чтобы грамотно оценить имущество, эксперты используют специальные методы. <br>Три наиболее востребованных метода оценки имущества, применимых практически к любому имуществу — это&nbsp;доходный, затратный и сравнительный.</p>
+			<div class="target__grid">
+				{% for target in targets %}
+					<div class="target__col">
+						<p class="h3" data-shadow="{{ target.title }}">{{ target.title }}</p>
+						<p>{{ target.content }}</p>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+
+	<section class="docs">
+		<div class="container">
+			<h2>Документы для оценки имущества</h2>
+			<p>Список документов, необходимых для экспертной оценки, зависит от вида имущества. <br>Но вам точно понадобятся:</p>
+			<div class="docs__grid">
+				{% for doc in docs %}
+					<div class="docs__col">
+						<div class="docs__img">
+							<img src="{{ doc.img }}" alt="{{ doc.title }}">
+						</div>
+						<p class="h3">{{ doc.title }}</p>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+
+	<section class="appl">
+		<div class="container">
+			<div class="appl__grid">
+				<div class="appl__content">
+					<p>Чтобы узнать точный список документов, </p>
+					<p class="h2">оставьте заявку</p>
+					<p class="h3">мы перезвоним и ответим на все ваши вопросы</p>
+				</div>
+				<div class="appl__form">
+					{{ form('ПЕРЕЗВОНИТЕ МНЕ') }}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="plus">
+		<div class="container">
+			<div class="plus__grid">
+				{% for plus in pluses %}
+					<div class="plus__col">
+						<div class="plus__content">
+							{{ svg(147, 140, plus.img)}}
+							<div class="plus__text">
+								<p class="h3">{{ plus.title }}</p>
+								<p>{{ plus.content }}</p>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+
+	<section class="map">
+		<img src="img/header-bg.jpg" alt="© 2015–2017 Экспертная оценка имущества.">
+		<div class="container">
+			<div class="map__grid">
+				<div class="map__col">
+					<p class="h2">Свяжитесь с нами</p>
+					<address>
+						{% for address in adresses %}
+							<div class="map__address-el">
+								<p>{{ address.type }}</p>
+								<p class="h3">{{ address.content | safe }}</p>
+							</div>
+						{% endfor %}
+					</address>
+				</div>
+				<div class="map__col">
+					<div id="map"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
 </main>
 
 {% endblock %}

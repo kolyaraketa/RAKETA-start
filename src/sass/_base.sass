@@ -94,3 +94,63 @@ div[class$="__col"]
 	display: none
 
 //TYPOGRAPHY
+h1, .h1
+	font-family: $us
+	font-weight: 700
+	font-size: em(100px)
+	line-height: 1
+	text-align: center
+	color: #ffffff
+h2, .h2
+	font-family: $rc
+	font-size: 700px
+	font-size: em(48px)
+	color: #333
+	text-align: center
+h3, .h3
+	font-family: $us
+	font-weight: 700
+	line-height: 1.38
+	font-size: em(26px)
+	color: #333333
+p
+	font-family: $r
+	font-size: em(20px)
+	line-height: 1.5
+	font-weight: 300
+	color: #333333
+
+a
+	color: #333333
+	text-decoration: underline
+	font-weight: 400
+	text-decoration-skip: ink
+	&:hover, &:active
+		color: $accent
+	&.link__tel
+		white-space: nowrap
+
+section
+	padding: 30px 0
+
+//Elements
+button.btn
+	max-width: 100%
+	min-width: 257px
+	min-height: 75px
+	padding: 15px
+	box-shadow: 0 10px 20px rgba(16, 34, 12, 0.6)
+	border-radius: $br
+	background-color: #64b34c
+	background-image: linear-gradient(to top, #4fa02b 0%, #68b340 100%)
+	text-shadow: 0 -1px 0 #447e34
+	color: #ffffff
+	font-family: $us
+	font-weight: 700
+	font-size: em(20px)
+	letter-spacing: 1px
+	border: none
+	transition: box-shadow .15s ease, transform .15s ease
+	&:hover, &:active
+		transform: translateY(2px)
+		box-shadow: 0 3px 6px rgba(16, 34, 12, 0.6)

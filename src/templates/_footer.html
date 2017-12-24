@@ -1,5 +1,22 @@
 	<footer>
 		<div class="container">
-			<a href="https://t.me/kolya_raketa" target="_blank">Made with&nbsp;❤️&nbsp;by Kolya&nbsp;Raketa</a>
+			<div class="footer__content">
+				<a href="/">© 2015–2017 Экспертная оценка имущества.</a>
+				<div class="footer__contacts">
+					<a href="tel:{{ data.tel }}">
+						{{ svg(33, 33, 'tel')}}
+						{{ data.tel }}
+					</a>
+					<a href="mailto:{{ data.email }}">
+						{{ svg(33, 33, 'email')}}
+						{{ data.email }}
+					</a>
+				</div>
+				<div class="footer__social">
+					<a href="#">{{ svg(33, 33, 'fb')}}</a>
+					<a href="#">{{ svg(33, 33, 'yt')}}</a>
+					<a href="#">{{ svg(33, 33, 'tg')}}</a>
+				</div>
+			</div>
 		</div>
 	</footer>

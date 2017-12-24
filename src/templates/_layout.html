@@ -2,7 +2,36 @@
 <html lang="ru" itemscope itemtype="http://schema.org/WebPage">
 
 <head>
-	
+
+	{# SVG Macro #}
+	{% macro svg(width='auto', height='auto', name='') %}
+		<svg width="{{ width }}" height="{{ height }}">
+			<use xlink:href="#{{ name }}"></use>
+		</svg>
+	{% endmacro %}
+
+	{# FORM Macro #}
+	{% macro form(btn='Заказать оценку') %}
+		<form data-form="Заказать" name="order__form" action="raketa-api.php" class="typical-form">
+			<div class="form__field">
+				<label for="order-name">
+					<span>Імя</span>
+				</label>
+				<input type="text" name="name" class="raketa_validation">
+			</div>
+			<div class="form__field">
+				<label for="order-phone">
+					<span>Телефон</span>
+				</label>
+				<input type="tel" name="phone" class="user_phone raketa_validation" placeholder="+38(___) ___-__-__" required="">
+			</div>
+			<div class="form__btn">
+				<button type="submit" class="btn">{{ btn }}</button>
+				<p class="form_msg"></p>
+			</div>
+		</form>
+	{% endmacro %}
+
 	{% include "./_meta.html" %}
 
 	<!-- HEADER CSS START -->
