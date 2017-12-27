@@ -47,7 +47,7 @@ gulp.task('sassStream', function () {
 		.pipe(sass().on('error', sass.logError))
 		.pipe(gulp.dest('./src/temp/css'))
 		.pipe(gulp.dest('./src/css'))
-		.pipe(browserSync.reload({stream: true}));
+		.pipe(browserSync.stream());
 });
 
 gulp.task('sassProd', function () {

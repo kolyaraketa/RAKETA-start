@@ -11,11 +11,11 @@
 	{% endmacro %}
 
 	{# FORM Macro #}
-	{% macro form(btn='Заказать оценку') %}
-		<form data-form="Заказать" name="order__form" action="raketa-api.php" class="typical-form">
+	{% macro form(btn='Заказать оценку', name='', class='') %}
+		<form data-form="Заказать" name="{{ name }}" action="raketa-api.php" class="typical-form {{ class }}">
 			<div class="form__field">
 				<label for="order-name">
-					<span>Імя</span>
+					<span>Имя</span>
 				</label>
 				<input type="text" name="name" class="raketa_validation">
 			</div>

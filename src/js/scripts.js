@@ -20,16 +20,30 @@ document.addEventListener('DOMContentLoaded', function(){
 	 * @param {Boolean} state Enable or disable scrollLock (true/false)
 	 */
 	var htmlTag = document.querySelector('html');
-	var scrollPos;
+	var scrollPos = 0;
 	function lockScroll(state){
-		if(state){
+		if(scrollPos === 0){
 			scrollPos = window.pageYOffset;
-			htmlTag.classList.add('scroll-locked');
-			htmlTag.style.top = '-' + scrollPos + 'px';
-		}else{
-			htmlTag.classList.remove('scroll-locked');
-			htmlTag.style.top = '';
-			window.scrollTo(0, scrollPos);
+		}
+		if(state === 'toggle'){
+			if(htmlTag.classList.contains('scroll-locked')){
+				htmlTag.classList.remove('scroll-locked');
+				window.scrollTo(0, scrollPos);
+				scrollPos = 0;
+			}else{
+				htmlTag.style.top = '-' + scrollPos + 'px';
+				htmlTag.classList.add('scroll-locked');
+			}
+		} else {
+			if(state){
+				htmlTag.style.top = '-' + scrollPos + 'px';
+				htmlTag.classList.add('scroll-locked');
+			}else{
+				htmlTag.classList.remove('scroll-locked');
+				htmlTag.style.top = '';
+				window.scrollTo(0, scrollPos);
+				scrollPos = 0;
+			}
 		}
 	}
 
@@ -39,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	document.onkeydown = function(event){
 		event = event || window.event;
 		if (event.keyCode === 27){
-			console.log('Esc pressed! 👌');
+			popupOrder.classList.remove('popup__order-visible');
 			lockScroll(false);
 		}
 	};
@@ -188,4 +202,56 @@ document.addEventListener('DOMContentLoaded', function(){
 		request.send(formData);
 	}
 	
+	var popupBtnsOrder = document.querySelectorAll('.popup__order-show');
+	var popupOrder = document.querySelector('.popup__order');
+	var popupClose = document.querySelector('.popup__order-close');
+	(function(){
+		for(var i = 0; i < popupBtnsOrder.length; i++){
+			popupBtnsOrder[i].addEventListener('click', function(e){
+				e.preventDefault();
+				popupOrder.classList.add('popup__order-visible');
+				lockScroll(true);
+			});
+		}
+	})();
+	popupClose.addEventListener('click', function(e){
+		e.preventDefault();
+		popupOrder.classList.remove('popup__order-visible');
+		lockScroll(false);
+	});
+	popupOrder.addEventListener('click', function(e){
+		if(this === e.target){
+			popupOrder.classList.remove('popup__order-visible');
+			lockScroll(false);
+		}
+	});
+
 });
+
+/**
+* Google MAPS API
+*/
+function initMap() {
+	var mapPos;
+	var uluru = { lat: 50.458195, lng: 30.477754 };
+	mapPos = uluru;
+	var map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 17,
+		center: mapPos,
+		scrollwheel: false
+	});
+	var marker = new google.maps.Marker({
+		position: uluru,
+		map: map,
+		title: 'ул. Коперника 12Д',
+		// icon: '/img/map-icon.svg',
+		iconSize: 20
+	});
+	marker.addListener('click', function() {
+		window.open('https://goo.gl/maps/GFNda6A52kn', '_blank');
+	});
+	var infowindow = new google.maps.InfoWindow({
+		content: '<b>Экспертная оценка имущества</b><br> ул. Коперника 12Д <br><a href="https://goo.gl/maps/LPH9ecPgKX62" target="_blank" class="gmaps-link"><span>Показать на Google Картах</span></a>'
+	});
+	infowindow.open(map, marker);
+}

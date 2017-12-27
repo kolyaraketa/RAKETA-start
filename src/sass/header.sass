@@ -38,6 +38,7 @@ header
 		font-family: $rc
 		letter-spacing: 0.8px
 		font-weight: 700
+		white-space: nowrap
 		&:after
 			+ps(0, 2px)
 			background-color: #b8ccae
@@ -71,11 +72,38 @@ header
 			fill: #b8ccae
 .header__lng
 	margin-left: auto
+	position: relative
+	z-index: 2
+	ul
+		visibility: hidden
+		opacity: 0
+		transition: opacity .2s ease, visibility .2s ease
+		list-style: none
+		position: absolute
+		width: 100%
+		padding: 9px 5px
+		top: 26px
+		right: 0
+		border-radius: 4px
+		background-color: #b8ccae
+		a
+			color: #000
+			text-transform: uppercase
+			text-decoration: none
+			font-family: $rc
+			display: block
+	&:hover
+		.header__lng-change
+			background-color: #b8ccae
+			color: #111
+			&:after
+				border-color: #111
+			& + ul
+				visibility: visible
+				opacity: 1
 .header__lng-change
 	font-family: $rc
 	font-size: em(16px)
-	background: none
-	border: none
 	color: #ffffff
 	text-transform: uppercase
 	position: relative
@@ -95,9 +123,46 @@ header
 		margin-top: -6px
 		right: 12px
 		transition: .2s border-color
-	&:hover
-		background-color: #b8ccae
-		color: #111
-		&:after
-			border-color: #111
 
+//Popup forms
+.popup
+	position: fixed
+	z-index: 9
+	top: 0
+	left: 0
+	width: 100%
+	height: 100vh
+	display: flex
+	align-items: center
+	justify-content: center
+	background-color: rgba(#0b0d12, .7)
+	padding: 15px
+	opacity: 0
+	visibility: hidden
+	transition: visibility .3s ease, opacity .3s ease
+.popup-close
+	fill: #fff
+	position: absolute
+	top: 0
+	right: 0
+	background: none
+	border: none
+	opacity: 0.7
+	cursor: pointer
+	border-radius: 4px
+	width: 50px
+	height: 50px
+	&:hover, &:active
+		opacity: 1
+		background-color: rgba(#fff, .1)
+.popup__order
+	&.popup__order-visible
+		visibility: visible
+		opacity: 1
+		.popup__order-form
+			opacity: 1
+			transform: scale(1) translateY(0)
+.popup__order-form
+	opacity: 0
+	transition: transform .5s ease, opacity .5s ease
+	transform: scale(2) translateY(300px)

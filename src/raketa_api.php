@@ -1,7 +1,7 @@
 <?php
 
 $recepient = "raketakolya@gmail.com";
-$pagetitle = "Title of my awesome website";
+$pagetitle = "Экспертная оценка имущества";
 
 $mail = isset($_POST['mail']) ? trim($_POST['mail']) : '';
 $name = isset($_POST['name']) ? trim($_POST['name']) : '';
@@ -23,28 +23,26 @@ $time_submitted = date("H:i");
 if($phone != ''){
 
 	$message = "
-	<h2>‼ $pagetitle ‼</h2>
-<table>
-	<tr><td>👤 Имя:</td><td>$name</td></tr>
-	<tr><td>☎ Телефон:</td><td>$phone</td></tr>
-	<tr><td>📧 E-mail:</td><td>$mail</td></tr>
-	<tr><td>📝 Отправленная форма:</td><td>$data_form</td></tr>
-	<tr><td>🔗 Страница заявки:</td><td>$url</td></tr>
-	<tr><td>📅 Дата заявки:</td><td>$date_submitted</td></tr>
-	<tr><td>⏲ Время заявки:</td><td>$time_submitted</td></tr>
-	<tr><td>🔙 Пришел со страницы:</td><td>$ref</td></tr>
+	‼ $pagetitle ‼
+	👤 Имя: $name
+	☎ Телефон: $phone
+	📧 E-mail: $mail
+	📝 Отправленная форма: $data_form
+	🔗 Страница заявки: $url
+	📅 Дата заявки: $date_submitted
+	⏲ Время заявки: $time_submitted
+	🔙 Пришел со страницы: $ref
 
-	<tr><td>utm_source:</td><td>$utm_source</td></tr>
-	<tr><td>utm_campaign:</td><td>$utm_campaign</td></tr>
-	<tr><td>utm_medium:</td><td>$utm_medium</td></tr>
-	<tr><td>utm_term:</td><td>$utm_term</td></tr>
-	<tr><td>utm_content:</td><td>$utm_content</td></tr>
-</table>
+	utm_source: $utm_source
+	utm_campaign: $utm_campaign
+	utm_medium: $utm_medium
+	utm_term: $utm_term
+	utm_content: $utm_content
 ";
 
 	$headers = 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-type: text/html; charset=urf-8' . "\r\n";
-	$headers .= 'From: raketakolya@gmail.com';
+	$headers .= 'From: no-reply@lexstatus.com.ua';
 	mail($recepient, $pagetitle, $message, $headers);
 
 	//SEND MESSAGE TO TELEGRAM
