@@ -11,7 +11,7 @@
 	{% endmacro %}
 
 	{# FORM Macro #}
-	{% macro form(btn='Заказать оценку', name='', class='') %}
+	{% macro form(btn='Заказать', name='', class='') %}
 		<form data-form="Заказать" name="{{ name }}" action="raketa-api.php" class="typical-form {{ class }}">
 			<div class="form__field">
 				<label for="order-name">
@@ -77,6 +77,10 @@
 	<!-- FOOTER START -->
 	{% include "./_footer.html" %}
 	<!-- FOOTER END -->
+
+	<!-- POPUP START -->
+	{% include "./_popup.html" %}
+	<!-- POPUP END -->
 	
 	
 	{% if build == 'dev' %}

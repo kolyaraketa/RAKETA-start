@@ -1,7 +1,7 @@
 <?php
 
 $recepient = "raketakolya@gmail.com";
-$pagetitle = "Экспертная оценка имущества";
+$pagetitle = "PageTitle";
 
 $mail = isset($_POST['mail']) ? trim($_POST['mail']) : '';
 $name = isset($_POST['name']) ? trim($_POST['name']) : '';

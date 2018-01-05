@@ -1,5 +1,18 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 82.67 76.64">
-  <title>favicon-ocenka</title>
-  <polygon points="5.33 36.28 67.58 10.03 53.33 66.28 37.83 48.78 29.83 59.78 25.83 41.78 5.33 36.28" style="fill: #339e7a;stroke: #137659;stroke-linecap: round;stroke-linejoin: round;stroke-width: 2px"/>
-  <polygon points="37.83 48.78 67.58 10.03 25.73 41.3 29.83 59.78 37.83 48.78" style="fill: #137659"/>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#213444;}
+	.st1{fill:#FFFFFF;}
+	.st2{fill:none;}
+</style>
+<circle class="st0" cx="250" cy="250" r="250"/>
+<g id="Слой_2_1_">
+	<path class="st1" d="M194.9,200.1c-7.6,40.7-8.4,79.3-7,109.5c-7.6,4.4-19.5,14.8-25.6,38.9c-9.3,36.3,1.7,77.3,1.7,77.3l25-97.9
+		c2.3,26.4,5.5,43,5.5,43l55.3-296.6C249.8,74.2,211.7,109.2,194.9,200.1L194.9,200.1z M337.8,348.1c-6.4-24.7-18.9-35.1-26.4-39.2
+		c1.5-30.2,0.6-68.6-7-108.9c-16.9-90.9-54.6-125.8-54.6-125.8l54.9,296.6c0,0,3.8-17.4,5.8-45.3L336,425.8
+		C336,425.8,347,384.8,337.8,348.1z M250.1,306.4L250.1,306.4"/>
+</g>
+<path class="st2" d="M-1.5,397.5h503v63h-503V397.5z"/>
 </svg>

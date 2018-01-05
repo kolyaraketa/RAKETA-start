@@ -50,6 +50,12 @@ gulp.task('sassStream', function () {
 		.pipe(browserSync.stream());
 });
 
+gulp.task('fixHeaderPaths', function(){
+	return gulp.src(['./src/css/header.min.css'])
+		.pipe(replace('../', ''))
+		.pipe(gulp.dest('./src/css/'));
+});
+
 gulp.task('sassProd', function () {
 	gulp.src('./src/sass/**/*.sass')
 		.pipe(sass().on('error', sass.logError))
@@ -57,9 +63,6 @@ gulp.task('sassProd', function () {
 		.pipe(cleanCSS())
 		.pipe(rename({suffix: '.min', prefix : ''}))
 		.pipe(gulp.dest('./dist/css'))
-		.pipe(gulp.dest('./src/css'));
-	return gulp.src(['./src/css/header.min.css'])
-		.pipe(replace('@font-face', '111'))
 		.pipe(gulp.dest('./src/css'));
 });
 
@@ -136,6 +139,11 @@ gulp.task('svg-auto-sprite', ['svg-sprite'], function() {
 	}, 1000));
 });
 
+gulp.task('copyOtherFiles', function () {
+	return gulp.src('./src/**/*.php')
+		.pipe(gulp.dest('./dist'));
+});
+
 
 gulp.task('default', function () {
 	runSequence('img', 'js', 'fonts', 'svg-auto-sprite', 'sassStream', 'html');
@@ -152,7 +160,7 @@ gulp.task('default', function () {
 });
 
 gulp.task('build', function() { 
-	runSequence(['imgProd', 'sassProd', 'jsProd', 'fontsProd'], 'htmlProd');
+	runSequence(['imgProd', 'sassProd', 'jsProd', 'fontsProd'], 'fixHeaderPaths', 'htmlProd', 'copyOtherFiles');
 });
 
 gulp.task('clear', function() { return del.sync(['./dist', './src/temp']); });

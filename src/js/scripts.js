@@ -227,31 +227,3 @@ document.addEventListener('DOMContentLoaded', function(){
 	});
 
 });
-
-/**
-* Google MAPS API
-*/
-function initMap() {
-	var mapPos;
-	var uluru = { lat: 50.458195, lng: 30.477754 };
-	mapPos = uluru;
-	var map = new google.maps.Map(document.getElementById('map'), {
-		zoom: 17,
-		center: mapPos,
-		scrollwheel: false
-	});
-	var marker = new google.maps.Marker({
-		position: uluru,
-		map: map,
-		title: 'ул. Коперника 12Д',
-		// icon: '/img/map-icon.svg',
-		iconSize: 20
-	});
-	marker.addListener('click', function() {
-		window.open('https://goo.gl/maps/GFNda6A52kn', '_blank');
-	});
-	var infowindow = new google.maps.InfoWindow({
-		content: '<b>Экспертная оценка имущества</b><br> ул. Коперника 12Д <br><a href="https://goo.gl/maps/LPH9ecPgKX62" target="_blank" class="gmaps-link"><span>Показать на Google Картах</span></a>'
-	});
-	infowindow.open(map, marker);
-}
