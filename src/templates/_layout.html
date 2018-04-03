@@ -10,41 +10,10 @@
 		</svg>
 	{% endmacro %}
 
-	{# FORM Macro #}
-	{% macro form(btn='Заказать', name='', class='') %}
-		<form data-form="Заказать" name="{{ name }}" action="raketa-api.php" class="typical-form {{ class }}">
-			<div class="form__field">
-				<label for="order-name">
-					<span>Имя</span>
-				</label>
-				<input type="text" name="name" class="raketa_validation">
-			</div>
-			<div class="form__field">
-				<label for="order-phone">
-					<span>Телефон</span>
-				</label>
-				<input type="tel" name="phone" class="user_phone raketa_validation" placeholder="+38(___) ___-__-__" required="">
-			</div>
-			<div class="form__btn">
-				<button type="submit" class="btn">{{ btn }}</button>
-				<p class="form_msg"></p>
-			</div>
-		</form>
-	{% endmacro %}
-
 	{% include "./_meta.html" %}
 
-	<!-- HEADER CSS START -->
-	
+	<link rel="stylesheet" href="css/style.css">
 
-	{% if build == 'dev' %}
-		<style>{% include "../css/header.css" %}</style>
-	{% else %}
-		<style>{% include "../css/header.min.css" %}</style>
-	{% endif %}
-
-
-	<!-- HEADER CSS END -->
 
 </head>
 
@@ -84,12 +53,10 @@
 	
 	
 	{% if build == 'dev' %}
-		<link rel="stylesheet" href="css/style.css">
 		<script src="js/libs.js"></script>
 		<script src="js/scripts.js"></script>
 	{% else %}
-		<link rel="stylesheet" href="css/style.min.css">
-		<script src="js/scripts.min.js"></script>
+		<script src="js/scripts.js"></script>
 	{% endif %}
 
 </body>

@@ -1,6 +1,6 @@
-pyftsubset fonts/Roboto.ttf --output-file=fonts/Roboto/Roboto.ttf --unicodes-file=fonts/codes.txt
+pyftsubset src/fonts/Roboto.ttf --output-file=src/fonts/Roboto/Roboto.ttf --unicodes-file=src/fonts/codes.txt
 
 
-ttf2woff fonts/Roboto/Roboto.ttf fonts/Roboto/Roboto.woff
+ttf2woff src/fonts/Roboto/Roboto.ttf src/fonts/Roboto/Roboto.woff
 
-cat fonts/Roboto/Roboto.ttf | ttf2woff2 >> fonts/Roboto/Roboto.woff2
+cat src/fonts/Roboto/Roboto.ttf | ttf2woff2 >> src/fonts/Roboto/Roboto.woff2

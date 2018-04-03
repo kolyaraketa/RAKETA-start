@@ -9,14 +9,13 @@ var gulp           = require('gulp'),
 		svgSprite      = require('gulp-svg-sprite'),
 		svgmin         = require('gulp-svgmin'),
 		chokidar       = require('chokidar'),
-		uglify         = require('gulp-uglify'),
 		concat         = require('gulp-concat'),
 		rename         = require('gulp-rename'),
 		cleanCSS       = require('gulp-clean-css'),
 		autoprefixer   = require('gulp-autoprefixer'),
 		imagemin       = require('gulp-imagemin'),
 		uglify         = require('gulp-uglify'),
-		replace        = require('gulp-replace'),
+		cachebust      = require('gulp-cache-bust'),
 		watch          = require('gulp-watch'),
 		sass           = require('gulp-sass');
 
@@ -30,6 +29,7 @@ gulp.task('html', function () {
 gulp.task('htmlProd', function () {
 	return gulp.src(['./src/[^_]*.html', './src/templates/[^_]*.html'])
 		.pipe(nunjucks.compile({build: 'prod'}))
+		.pipe(cachebust({type: 'timestamp'}))
 		.pipe(gulp.dest('./dist'));
 });
 
@@ -50,18 +50,11 @@ gulp.task('sassStream', function () {
 		.pipe(browserSync.stream());
 });
 
-gulp.task('fixHeaderPaths', function(){
-	return gulp.src(['./src/css/header.min.css'])
-		.pipe(replace('../', ''))
-		.pipe(gulp.dest('./src/css/'));
-});
-
 gulp.task('sassProd', function () {
 	gulp.src('./src/sass/**/*.sass')
 		.pipe(sass().on('error', sass.logError))
 		.pipe(autoprefixer({browsers: ['last 15 versions']}))
 		.pipe(cleanCSS())
-		.pipe(rename({suffix: '.min', prefix : ''}))
 		.pipe(gulp.dest('./dist/css'))
 		.pipe(gulp.dest('./src/css'));
 });
@@ -78,7 +71,7 @@ gulp.task('js', function() {
 gulp.task('jsProd', function() {
 	return gulp.src(['./src/libs/**/*.js', './src/js/scripts.js'])
 		.pipe(uglify())
-		.pipe(concat('scripts.min.js'))
+		.pipe(concat('scripts.js'))
 		.pipe(gulp.dest('./dist/js'));
 });
 
@@ -140,27 +133,32 @@ gulp.task('svg-auto-sprite', ['svg-sprite'], function() {
 });
 
 gulp.task('copyOtherFiles', function () {
-	return gulp.src('./src/**/*.php')
+	return gulp.src(['./src/*.php', './src/*.mp4', './src/*.webm'])
 		.pipe(gulp.dest('./dist'));
+});
+
+gulp.task('copyOtherFilesTemp', function () {
+	return gulp.src(['./src/**/*.php', './src/**/*.mp4', './src/**/*.webm'])
+		.pipe(gulp.dest('./src/temp'));
 });
 
 
 gulp.task('default', function () {
-	runSequence('img', 'js', 'fonts', 'svg-auto-sprite', 'sassStream', 'html');
+	runSequence('img', 'js', 'fonts', 'svg-auto-sprite', 'sassStream', 'html', 'copyOtherFilesTemp');
 	browserSync({
 		server: { baseDir: './src/temp' },
 		notify: false,
 		// tunnel: true,
 		// tunnel: "projectmane", //Demonstration page: http://projectmane.localtunnel.me
 	});
-	gulp.watch(['./src/*.html', './src/templates/*.html', './src/css/header.css'], ['html']);
+	gulp.watch(['./src/*.html', './src/templates/*.html'], ['html']);
 	gulp.watch('./src/sass/**/_*.sass', ['sass']);
 	gulp.watch(['./src/js/*.js', './src/libs/**/*.js'], ['js']);
 	gulp.watch('./src/fonts/**/*', ['fonts']);
 });
 
 gulp.task('build', function() { 
-	runSequence(['imgProd', 'sassProd', 'jsProd', 'fontsProd'], 'fixHeaderPaths', 'htmlProd', 'copyOtherFiles');
+	runSequence(['imgProd', 'sassProd', 'jsProd', 'fontsProd'], 'htmlProd', 'copyOtherFiles');
 });
 
 gulp.task('clear', function() { return del.sync(['./dist', './src/temp']); });
