@@ -1,4 +1,7 @@
 <?php
+$recepient = "raketakolya@gmail.com";
+$pagetitle = "PageTitle";
+
 $name = isset($_POST['name']) ? trim($_POST['name']) : '';
 $mail = isset($_POST['mail']) ? trim($_POST['mail']) : '';
 $phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
@@ -41,6 +44,11 @@ if($phone != ''){
 	$message .= empty($utm_term) ? '' : 'utm_term: ' . $utm_term . PHP_EOL;
 	$message .= empty($utm_content) ? '' : 'utm_content: ' . $utm_content;
 
+	//Send email
+	$headers = 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=urf-8' . "\r\n";
+	$headers .= 'From: raketakolya@gmail.com';
+	mail($recepient, $pagetitle, $message, $headers);
 
 	//SEND MESSAGE TO TELEGRAM
 	function sendMessage($chatID, $message, $token) {
@@ -53,12 +61,8 @@ if($phone != ''){
 		curl_close($ch);
 	}
 
-	if($name === "test"){
-		$chatID = "513914109";
-	} else {
-		$chatID = "-276303359";
-	}
-	$token = "bot581241087:AAErvu7L4NxhF_-SiD6D_pE_YrS7MTY1CWE";
+	$chatID = "***";
+	$token = "bot***";
 	sendMessage($chatID, $message, $token);
 
 }
