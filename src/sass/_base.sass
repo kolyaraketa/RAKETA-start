@@ -31,20 +31,20 @@ html
 	font-size: 16px
 	line-height: 1.15
 	min-width: 320px
-	font-family: $r
+	font-family: $seg
 	-webkit-text-size-adjust: 100%
 	-ms-text-size-adjust: 100%
 	-ms-overflow-style: scrollbar
 	-webkit-tap-highlight-color: transparent
 
 @-ms-viewport
-  width: device-width
-
+	width: device-width
 
 body
 	position: relative
 	color: #333
-	overflow-x: hidden
+	z-index: 1
+	// overflow-x: hidden
 	min-height: 100vh
 
 main
@@ -69,10 +69,11 @@ html
 	100%
 		opacity: 1
 
-//Dissable allert message for form validation
-.inspect-message-text
-	display: none
+ul
+	list-style: none
 
+button
+	cursor: pointer
 
 /* Change Autocomplete styles in Chrome*/
 input:-webkit-autofill,
@@ -93,12 +94,12 @@ select:-webkit-autofill:focus
 
 //CONTAINER WIDTH
 .container
-	+cont(1130px)
+	+cont(1170px)
 
 //GRID
-[class$="__grid"]
+[class*="__grid"]
 	+grid
-[class$="__col"]
+[class*="__col"]
 	padding-right: 15px
 	padding-left: 15px
 
@@ -106,3 +107,71 @@ select:-webkit-autofill:focus
 	display: none
 
 //TYPOGRAPHY
+h1, .h1
+// 
+
+h2, .h2
+// 
+
+h3, .h3
+// 
+
+p
+// 
+
+//Helpers
+.color__accent
+	color: $accent
+
+//Elements
+// 
+
+//Popup
+.popup
+	position: fixed
+	top: 0
+	right: 0
+	left: 0
+	bottom: 0
+	z-index: 0
+	opacity: 0
+	background-color: rgba(0,0,0,.7)
+	transition: visibility 0s linear 0.25s, opacity 0.25s 0s
+	display: flex
+	overflow: scroll
+	visibility: hidden
+	z-index: 9
+	perspective: 100vh
+	padding: 5px
+	will-change: opacity, visibility
+	&-visible
+		opacity: 1
+		visibility: visible
+		transition: visibility 0s linear 0s, opacity 0.25s 0s
+		.popup__content
+			transform: rotateY(0)
+.popup__content
+	margin: auto
+	background-color: #fff
+	transition: transform .35s ease
+	transform: rotateY(-70deg)
+	position: relative
+	max-width: 100%
+	will-change: transform
+.popup__close
+	position: absolute
+	right: 0
+	top: 0
+	padding: 10px
+	border: none
+	background: none
+	&:hover, &:active
+		svg
+			transform: rotate(90deg)
+	svg
+		display: block
+		transition: transform .2s ease
+.form__temp
+	text-align: center
+	&:empty
+		display: none

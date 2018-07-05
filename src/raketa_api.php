@@ -1,48 +1,53 @@
 <?php
-
 $recepient = "raketakolya@gmail.com";
 $pagetitle = "PageTitle";
 
-$mail = isset($_POST['mail']) ? trim($_POST['mail']) : '';
 $name = isset($_POST['name']) ? trim($_POST['name']) : '';
 $mail = isset($_POST['mail']) ? trim($_POST['mail']) : '';
 $phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
 $data_form = isset($_POST['data_form']) ? trim($_POST['data_form']) : '';
 $url = isset($_POST['url']) ? trim($_POST['url']) : '';
 $ref = isset($_POST['ref']) ? trim($_POST['ref']) : '';
+$city = isset($_POST['city']) ? trim($_POST['city']) : '';
+$from = isset($_POST['from']) ? trim($_POST['from']) : '';
+$page_name = isset($_POST['page_name']) ? trim($_POST['page_name']) : '';
+$client_id = isset($_POST['client_id']) ? trim($_POST['client_id']) : '';
 $utm_source = isset($_POST['utm_source']) ? trim($_POST['utm_source']) : '';
 $utm_content = isset($_POST['utm_content']) ? trim($_POST['utm_content']) : '';
 $utm_campaign = isset($_POST['utm_campaign']) ? trim($_POST['utm_campaign']) : '';
 $utm_term = isset($_POST['utm_term']) ? trim($_POST['utm_term']) : '';
 $utm_medium = isset($_POST['utm_medium']) ? trim($_POST['utm_medium']) : '';
+$amo = isset($_POST['amo']) ? trim($_POST['amo']) : true;
 $ip_address = isset($_SERVER["REMOTE_ADDR"]) ? trim($_SERVER["REMOTE_ADDR"]) : '';
 
-$date_submitted = date('d.m.Y');
-$time_submitted = date("H:i");
+$hostname = $_SERVER['HTTP_HOST'];
+
+$format = isset($_POST['format']) ? trim($_POST['format']) : '';
+
+$visit_time = date('H:i') . ' ' . date('d.m.Y');
 
 if($phone != ''){
 
-	$message = "
-	‼ $pagetitle ‼
-	👤 Имя: $name
-	☎ Телефон: $phone
-	📧 E-mail: $mail
-	📝 Отправленная форма: $data_form
-	🔗 Страница заявки: $url
-	📅 Дата заявки: $date_submitted
-	⏲ Время заявки: $time_submitted
-	🔙 Пришел со страницы: $ref
+	$message = '🎉' . $page_name . '🎉' . PHP_EOL;
+	$message .= empty($name) ? '' : '👤 Имя: ' . $name . PHP_EOL;
+	$message .= '☎ Телефон: ' . $phone . PHP_EOL;
+	$message .= empty($mail) ? '' : '📧 E-mail: ' . $mail . PHP_EOL;
+	$message .= empty($format) ? '' : '👯 Формат участия: ' . $format . PHP_EOL;
+	$message .= empty($data_form) ? '' : '📝 Отправленная форма: ' . $data_form . PHP_EOL;
+	$message .= empty($url) ? '' : '🔗 Страница заявки: ' . $url . PHP_EOL;
+	$message .= empty($city) ? '' : '🌎 Локация: ' . $city . PHP_EOL;
+	$message .= '⏲ Время заявки: ' . $visit_time . PHP_EOL;
+	$message .= empty($ref) ? '' : '🔙 Пришел со страницы: ' . $ref . PHP_EOL;
+	$message .= empty($utm_source) ? '' : 'utm_source: ' . $utm_source . PHP_EOL;
+	$message .= empty($utm_campaign) ? '' : 'utm_campaign: ' . $utm_campaign . PHP_EOL;
+	$message .= empty($utm_medium) ? '' : 'utm_medium: ' . $utm_medium . PHP_EOL;
+	$message .= empty($utm_term) ? '' : 'utm_term: ' . $utm_term . PHP_EOL;
+	$message .= empty($utm_content) ? '' : 'utm_content: ' . $utm_content;
 
-	utm_source: $utm_source
-	utm_campaign: $utm_campaign
-	utm_medium: $utm_medium
-	utm_term: $utm_term
-	utm_content: $utm_content
-";
-
+	//Send email
 	$headers = 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-type: text/html; charset=urf-8' . "\r\n";
-	$headers .= 'From: no-reply@lexstatus.com.ua';
+	$headers .= 'From: raketakolya@gmail.com';
 	mail($recepient, $pagetitle, $message, $headers);
 
 	//SEND MESSAGE TO TELEGRAM
@@ -56,9 +61,12 @@ if($phone != ''){
 		curl_close($ch);
 	}
 
-	$token = "bot****";
 	$chatID = "***";
+	$token = "bot***";
 	sendMessage($chatID, $message, $token);
 
 }
-?>
+
+if($amo === true){
+	include('amo/amocontactlist.php');
+}
