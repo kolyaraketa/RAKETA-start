@@ -1,33 +1,32 @@
-var gulp           = require('gulp'),
-		_              = require('lodash'),
-		browserSync    = require('browser-sync'),
-		nunjucks       = require('gulp-nunjucks'),
-		rename         = require('gulp-rename'),
-		runSequence    = require('gulp-run-sequence'),
-		cache          = require('gulp-cache'),
-		del            = require('del'),
-		svgSprite      = require('gulp-svg-sprite'),
-		svgmin         = require('gulp-svgmin'),
-		chokidar       = require('chokidar'),
-		concat         = require('gulp-concat'),
-		rename         = require('gulp-rename'),
-		cleanCSS       = require('gulp-clean-css'),
-		autoprefixer   = require('gulp-autoprefixer'),
-		tinypng        = require('gulp-tinypng-unlimited'),
-		uglify         = require('gulp-uglify'),
-		cachebust      = require('gulp-cache-bust'),
-		watch          = require('gulp-watch'),
-		sass           = require('gulp-sass');
+const gulp = require('gulp'),
+	babel = require('gulp-babel'),
+	_ = require('lodash'),
+	browserSync = require('browser-sync'),
+	nunjucks = require('gulp-nunjucks'),
+	runSequence = require('gulp-run-sequence'),
+	cache = require('gulp-cache'),
+	del = require('del'),
+	svgSprite = require('gulp-svg-sprite'),
+	svgmin = require('gulp-svgmin'),
+	chokidar = require('chokidar'),
+	concat = require('gulp-concat'),
+	cleanCSS = require('gulp-clean-css'),
+	autoprefixer = require('gulp-autoprefixer'),
+	tinypng = require('gulp-tinypng-unlimited'),
+	uglify = require('gulp-uglify'),
+	cachebust = require('gulp-cache-bust'),
+	watch = require('gulp-watch'),
+	sass = require('gulp-sass');
 
 gulp.task('html', function () {
-	return gulp.src(['./src/[^_]*.html', './src/templates/[^_]*.html'])
+	return gulp.src(['./src/[^_]*.html', './src/*/[^_]*.html'])
 			.pipe(nunjucks.compile({build: 'dev'}))
 			.pipe(gulp.dest('./src/temp'))
 			.pipe(browserSync.reload({stream: true}));
 });
 
 gulp.task('htmlProd', function () {
-	return gulp.src(['./src/[^_]*.html', './src/templates/[^_]*.html'])
+	return gulp.src(['./src/[^_]*.html', './src/*/[^_]*.html'])
 		.pipe(nunjucks.compile({build: 'prod'}))
 		.pipe(cachebust({type: 'timestamp'}))
 		.pipe(gulp.dest('./dist'));
@@ -70,6 +69,7 @@ gulp.task('js', function() {
 
 gulp.task('jsProd', function() {
 	return gulp.src(['./src/libs/**/*.js', './src/js/scripts.js'])
+		.pipe(babel({ presets: ['env'] }))
 		.pipe(uglify())
 		.pipe(concat('scripts.js'))
 		.pipe(gulp.dest('./dist/js'));
@@ -148,10 +148,11 @@ gulp.task('default', function () {
 	browserSync({
 		server: { baseDir: './src/temp' },
 		notify: false,
+		ghostMode: false
 		// tunnel: true,
 		// tunnel: "projectmane", //Demonstration page: http://projectmane.localtunnel.me
 	});
-	gulp.watch(['./src/*.html', './src/templates/*.html'], ['html']);
+	gulp.watch(['./src/*.html', './src/**/*.html'], ['html']);
 	gulp.watch('./src/sass/**/_*.sass', ['sass']);
 	gulp.watch(['./src/js/*.js', './src/libs/**/*.js'], ['js']);
 	gulp.watch('./src/fonts/**/*', ['fonts']);
