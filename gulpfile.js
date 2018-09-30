@@ -1,23 +1,24 @@
-const gulp = require('gulp'),
-	babel = require('gulp-babel'),
-	_ = require('lodash'),
-	browserSync = require('browser-sync'),
-	nunjucks = require('gulp-nunjucks'),
-	runSequence = require('gulp-run-sequence'),
-	cache = require('gulp-cache'),
-	del = require('del'),
-	svgSprite = require('gulp-svg-sprite'),
-	svgmin = require('gulp-svgmin'),
-	chokidar = require('chokidar'),
-	concat = require('gulp-concat'),
-	cleanCSS = require('gulp-clean-css'),
-	autoprefixer = require('gulp-autoprefixer'),
-	tinypng = require('gulp-tinypng-unlimited'),
-	uglify = require('gulp-uglify'),
-	cachebust = require('gulp-cache-bust'),
-	watch = require('gulp-watch'),
-	path = require('path'),
-	sass = require('gulp-sass');
+const gulp = require('gulp');
+const babel = require('gulp-babel');
+const _ = require('lodash');
+const browserSync = require('browser-sync');
+const nunjucks = require('gulp-nunjucks');
+const runSequence = require('gulp-run-sequence');
+const cache = require('gulp-cache');
+const del = require('del');
+const svgSprite = require('gulp-svg-sprite');
+const svgmin = require('gulp-svgmin');
+const chokidar = require('chokidar');
+const concat = require('gulp-concat');
+const cleanCSS = require('gulp-clean-css');
+const autoprefixer = require('gulp-autoprefixer');
+const tinypng = require('gulp-tinypng-unlimited');
+const uglify = require('gulp-uglify');
+const cachebust = require('gulp-cache-bust');
+const watch = require('gulp-watch');
+const path = require('path');
+const sass = require('gulp-sass');
+const run = require('gulp-run-command');
 
 gulp.task('html', function () {
 	return gulp.src(['./src/[^_]*.html', './src/*/[^_]*.html'])
@@ -178,13 +179,13 @@ gulp.task('copyOtherFiles', function () {
 });
 
 gulp.task('copyOtherFilesTemp', function () {
-	return gulp.src(['./src/**/*.php', './src/**/*.mp4', './src/**/*.webm'])
+	return gulp.src('./src/**/*.@(php|mp4|webm|pdf)')
 		.pipe(gulp.dest('./src/temp'));
 });
 
 
 gulp.task('default', function () {
-	runSequence('img', 'js', 'fonts', 'svg-auto-sprite', 'sassStream', 'html', 'copyOtherFilesTemp');
+	runSequence('copyOtherFilesTemp', 'img', 'js', 'fonts', 'svg-auto-sprite', 'sassStream', 'html');
 	browserSync({
 		server: {
 			baseDir: './src/temp'

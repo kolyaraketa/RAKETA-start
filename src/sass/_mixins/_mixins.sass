@@ -16,6 +16,14 @@ $browser-context: 16
 		$context: $context * 1px
 	@return $pixels / $context * 1em
 
+//PX TO REM
+$browser-context: 16
+@function em($pixels, $context: $browser-context)
+	@if (unitless($pixels))
+		$pixels: $pixels * 1px
+	@if (unitless($context))
+		$context: $context * 1px
+	@return $pixels / $context * 1rem
 
 //RAKETA GRID SYSTEM
 $cols: 12
