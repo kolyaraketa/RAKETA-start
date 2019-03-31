@@ -3,16 +3,16 @@
 
 <head>
 
-	{# SVG Macro #}
-	{% macro svg(width='auto', height='auto', name='') %}
-		<svg width="{{ width }}" height="{{ height }}">
-			<use xlink:href="#{{ name }}"></use>
-		</svg>
-	{% endmacro %}
+  {# SVG Macro #}
+  {% macro svg(width='auto', height='auto', name='') %}
+    <svg width="{{ width }}" height="{{ height }}">
+      <use xlink:href="#{{ name }}"></use>
+    </svg>
+  {% endmacro %}
 
-	{% include "./_meta.html" %}
+  {% include "./_meta.html" %}
 
-	<link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">
 
 
 
@@ -20,45 +20,45 @@
 
 <body >
 
-	<!--HIDE CONTENT BEFORE PAGE LOADED START-->
-	<script>
-		document.body.className += " js-loading";
-		window.addEventListener("load", removeLoadingClass, false);
-		function removeLoadingClass() {
-			document.body.className = document.body.className.replace("js-loading", "");
-		}
-	</script>
-	<!--HIDE CONTENT BEFORE PAGE LOADED END-->
+  <!--HIDE CONTENT BEFORE PAGE LOADED START-->
+  <script>
+    document.body.className += " js-loading";
+    window.addEventListener("load", removeLoadingClass, false);
+    function removeLoadingClass() {
+      document.body.className = document.body.className.replace("js-loading", "");
+    }
+  </script>
+  <!--HIDE CONTENT BEFORE PAGE LOADED END-->
 
-	<!-- SVG SPRITE START-->
-	<div style="height: 0; width: 0; position: absolute; visibility: hidden">
-		{% include "../img/svg-sprite/sprite/symbol/svg/sprite.symbol.svg" %}
-	</div>
-	<!-- SVG SPRITE END-->
+  <!-- SVG SPRITE START-->
+  <div style="height: 0; width: 0; position: absolute; visibility: hidden">
+    {% include "../img/svg-sprite/sprite/symbol/svg/sprite.symbol.svg" %}
+  </div>
+  <!-- SVG SPRITE END-->
 
-	<!-- HEADER START -->
-	{% include "./_header.html" %}
-	<!-- HEADER END -->
+  <!-- HEADER START -->
+  {% include "./_header.html" %}
+  <!-- HEADER END -->
 
-	<!-- MAIN START -->
-	{% block content %}{% endblock %}
-	<!-- MAIN END -->
+  <!-- MAIN START -->
+  {% block content %}{% endblock %}
+  <!-- MAIN END -->
 
-	<!-- FOOTER START -->
-	{% include "./_footer.html" %}
-	<!-- FOOTER END -->
+  <!-- FOOTER START -->
+  {% include "./_footer.html" %}
+  <!-- FOOTER END -->
 
-	<!-- POPUP START -->
-	{% include "./_popup.html" %}
-	<!-- POPUP END -->
-	
-	
-	{% if build == 'dev' %}
-		<script src="js/libs.js"></script>
-		<script src="js/scripts.js"></script>
-	{% else %}
-		<script src="js/scripts.js"></script>
-	{% endif %}
+  <!-- POPUP START -->
+  {% include "./_popup.html" %}
+  <!-- POPUP END -->
+  
+  
+  {% if build == 'dev' %}
+    <script src="js/libs.js"></script>
+    <script src="js/scripts.js"></script>
+  {% else %}
+    <script src="js/scripts.js"></script>
+  {% endif %}
 
 </body>
 </html>
