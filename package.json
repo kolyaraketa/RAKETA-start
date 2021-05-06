@@ -55,7 +55,7 @@
     "gulp-run-command": "0.0.9",
     "gulp-run-sequence": "^0.3.2",
     "gulp-watch": "^4.3.11",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "vanilla-text-mask": "^5.0.1"
   }
 }
